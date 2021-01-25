@@ -1,0 +1,110 @@
+#ifdef __MSDOS__
+    #include <iostream.h>
+    #include <stdlib.h>
+#else
+    #include <iostream>
+    #include <cstdlib>
+    using namespace std;
+#endif
+#include <conio.h>
+
+int main (void)
+{
+    int alumnos_matriculados, docentes_matriculados, mujeres_entre_20_y_30, participantes, procedencia;
+    int publico_en_general, sexo;
+    float dinero_recaudado, edad, porcentaje_publico_en_general, promedio_de_edad, tarifa;
+    char tecla_repetir;
+    alumnos_matriculados = 0;
+    docentes_matriculados = 0;
+    mujeres_entre_20_y_30 = 0;
+    participantes = 0;
+    publico_en_general = 0;
+    dinero_recaudado = 0;
+    porcentaje_publico_en_general = 0;
+    promedio_de_edad = 0;
+    do {
+        system ("cls");
+        cout << "Ingrese el valor de edad: ";
+        cin >> edad;
+        cin.get();
+        participantes=participantes+1;
+        tarifa=0;
+        cout << "Seleccione el valor de procedencia." << endl;
+        cout << "\t1.- AU = Alumno de la UNAM" << endl;
+        cout << "\t2.- DU = Docente de la UNAM" << endl;
+        cout << "\t3.- Pg = Publico en general" << endl;
+        cout << "\t: ";
+        do {
+            cin >> procedencia;
+            cin.get();
+            if (procedencia<1||procedencia>3)
+            {
+                cout << "Valor incorrecto. Ingreselo nuevamente.: ";
+            }
+        } while (procedencia<1||procedencia>3);
+        cout << "Seleccione el valor de sexo." << endl;
+        cout << "\t1.- Mujer" << endl;
+        cout << "\t2.- Hombre" << endl;
+        cout << "\t: ";
+        do {
+            cin >> sexo;
+            cin.get();
+            if (sexo<1||sexo>2)
+            {
+                cout << "Valor incorrecto. Ingreselo nuevamente.: ";
+            }
+        } while (sexo<1||sexo>2);
+        if(procedencia==1)
+        {
+            tarifa=1550;
+            alumnos_matriculados=alumnos_matriculados+1;
+        }
+        if(procedencia==2)
+        {
+            tarifa=1300;
+            docentes_matriculados=docentes_matriculados+1;
+        }
+        if(procedencia==3)
+        {
+            tarifa=2500;
+            publico_en_general=publico_en_general+1;
+        }
+        if(sexo==1&&edad>=20&&edad<=30)
+            mujeres_entre_20_y_30=mujeres_entre_20_y_30+1;
+        dinero_recaudado=dinero_recaudado+tarifa;
+        promedio_de_edad=promedio_de_edad+edad;
+        cout << "Valor de tarifa: " << tarifa << endl;
+        cout << endl;
+        cout << "¿Desea repetir el proceso? (S/N): ";
+        do {
+            tecla_repetir = (char) getch();
+        } while (tecla_repetir!='s' && tecla_repetir!='n' && tecla_repetir!='S' && tecla_repetir!='N');
+        cout << endl;
+    } while (tecla_repetir=='s' || tecla_repetir=='S');
+    if (participantes == 0)
+    {
+        porcentaje_publico_en_general = 0;
+    }
+    else
+    {
+        porcentaje_publico_en_general=100.0*publico_en_general/participantes;
+    }
+    if (participantes == 0)
+    {
+        promedio_de_edad = 0;
+    }
+    else
+    {
+        promedio_de_edad=promedio_de_edad/participantes;
+    }
+    cout << "Valor de alumnos matriculados: " << alumnos_matriculados << endl;
+    cout << "Valor de docentes matriculados: " << docentes_matriculados << endl;
+    cout << "Valor de mujeres entre 20 y 30: " << mujeres_entre_20_y_30 << endl;
+    cout << "Valor de participantes: " << participantes << endl;
+    cout << "Valor de publico en general: " << publico_en_general << endl;
+    cout << "Valor de dinero recaudado: " << dinero_recaudado << endl;
+    cout << "Valor de porcentaje publico en general: " << porcentaje_publico_en_general << endl;
+    cout << "Valor de promedio de edad: " << promedio_de_edad << endl;
+    system ("pause");
+    return EXIT_SUCCESS;
+}
